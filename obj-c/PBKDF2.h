@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 #import <CommonCrypto/CommonKeyDerivation.h>
 
+extern NSString* const kSHA256;
+extern NSString* const kSHA512;
+
 @interface PBKDF2 : NSObject
 
 + (NSData *)pbkdf2:(NSString *)password salt:(NSString *) s count:(int) c kLen:(int) l withAlgo:(NSString *) algo;

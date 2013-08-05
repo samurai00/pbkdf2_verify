@@ -9,9 +9,9 @@
 #import "PBKDF2.h"
 #import "Base64.h"
 
-static NSString *kSHA256 = @"sha256";
-static NSString *kSHA512 = @"sha512";
-static int default_salt_len = 20;
+NSString* const kSHA256 = @"sha256";
+NSString* const kSHA512 = @"sha512";
+const int DEFAULT_SALT_LENGTH = 20;
 
 @implementation PBKDF2
 
@@ -41,12 +41,12 @@ static int default_salt_len = 20;
 
 + (NSString *)pass_hash:(NSString *) password length:(int) l count:(int) c withAlgo:(NSString *)algo;
 {
-    return [self pass_hash:password length:l count:c saltLength:default_salt_len withAlgo:algo];
+    return [self pass_hash:password length:l count:c saltLength:DEFAULT_SALT_LENGTH withAlgo:algo];
 }
 
 + (NSString *)pass_hash:(NSString *) password length:(int) l count:(int) c
 {
-    return [self pass_hash:password length:l count:c saltLength:default_salt_len];
+    return [self pass_hash:password length:l count:c saltLength:DEFAULT_SALT_LENGTH];
 }
 
 + (NSString *)pass_hash:(NSString *) password length:(int) l
