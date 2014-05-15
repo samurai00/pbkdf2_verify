@@ -5,15 +5,16 @@
 if (!defined('PASS_ALGO')) { /* define PASS_ALGO in your project: 'sha256' 'sha512' ... */
     define('PASS_ALGO', 'sha256');
 }
+define('DELI', '$');
 
 function pass_hash($password, $length = 32, $iterations = 10000, $salt_length = 20) {
     $salt = rand_str($salt_length);
     $h = base64_encode(hash_pbkdf2(PASS_ALGO, $password, $salt, $iterations, $length, true));
-    return sprintf('%s:%02d:%02d:%s%s', PASS_ALGO, $iterations/1000, $length, $salt, $h);
+    return sprintf('%s%s%02d%s%02d%s%s%s', PASS_ALGO, DELI, $iterations/1000, DELI, $length, DELI, $salt, $h);
 }
 
 function pass_verify($password, $hash) {
-    $params = explode(':', $hash);
+    $params = explode(DELI, $hash);
     $hash_len = ceil($params[2]/3) * 4;
     $salt_hash = array_pop($params);
     $params[] = substr($salt_hash, 0, strlen($salt_hash) - $hash_len);
