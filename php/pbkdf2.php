@@ -30,7 +30,7 @@ function pass_verify($password, $hash) {
 }
 
 function rand_str($length) {
-    $s = 'abcdefghijklmnokprstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    $s = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     $ret = '';
     $count = strlen($s);
     for ($i=0; $i<$length; $i++) {
