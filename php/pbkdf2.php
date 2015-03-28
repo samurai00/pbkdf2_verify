@@ -12,13 +12,13 @@ function pass_hash($password, $length = 32, $iterations = 10000, $salt_length = 
     global $algo_map;
     $salt = rand_str($salt_length);
     $h = base64_encode(hash_pbkdf2($algo_map[PASS_ALGO], $password, $salt, $iterations, $length, true));
-    return sprintf('%s%s%02d%s%02d%s%s%s', PASS_ALGO, DELI, $iterations/1000, DELI, $length, DELI, $salt, $h);
+    return sprintf('%s%s%02d%s%02d%s%s%s', PASS_ALGO, DELI, $iterations / 1000, DELI, $length, DELI, $salt, $h);
 }
 
 function pass_verify($password, $hash) {
     global $algo_map;
     $params = explode(DELI, $hash);
-    $hash_len = ceil($params[2]/3) * 4;
+    $hash_len = ceil($params[2] / 3) * 4;
     $salt_hash = array_pop($params);
     $params[] = substr($salt_hash, 0, strlen($salt_hash) - $hash_len);
     $params[] = substr($salt_hash, -$hash_len);
@@ -33,8 +33,8 @@ function rand_str($length) {
     $s = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     $ret = '';
     $count = strlen($s);
-    for ($i=0; $i<$length; $i++) {
-        $ret .= $s[mt_rand(0,$count - 1)];
+    for ($i = 0; $i < $length; $i++) {
+        $ret .= $s[mt_rand(0, $count - 1)];
     }
     return $ret;
 }
